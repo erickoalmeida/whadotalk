@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat ao Vivo</title>
+    <style>
+        /* Estilos para o chat */
+        #chat-container {
+            width: 1835px;
+            height: 500px;
+            border: 1px solid #adadad;
+            overflow: auto;
+        }
+
+        #message-container {
+            padding: 10px;
+        }
+
+        #message-container p {
+            margin: 5px 0;
+        }
+
+        #input-container {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="message-container"></div>
+    </div>
+
+    <div id="input-container">
+        <input type="text" id="message-input" placeholder="Digite sua mensagem..." />
+        <button type="button" id="send-button">Enviar</button>
+    </div>
+
+    <script>
+        // Função para exibir uma nova mensagem no chat
+        function showMessage(message) {
+            const messageContainer = document.getElementById('message-container');
+            const newMessage = document.createElement('p');
+            newMessage.innerText = message;
+            messageContainer.appendChild(newMessage);
+        }
+
+        // Função para enviar a mensagem digitada
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value;
+
+            // Verifica se a mensagem está vazia
+            if (message.trim() === '') {
+                return;
+            }
+
+            showMessage('Você: ' + message);
+
+            // Limpa o campo de entrada de mensagem
+            messageInput.value = '';
+        }
+
+        // Evento de clique do botão de envio
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+
+        // Evento de pressionar a tecla Enter para enviar a mensagem
+        document.getElementById('message-input').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
